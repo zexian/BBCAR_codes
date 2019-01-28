@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 27 22:24:19 2016
+Created on Tue Jan 20 22:24:19 2019
 
-@author: zza847
+@author: Zexian
 """
-direc=InputDir='/projects/p30007/Zexian/Alignment/Germline_37'
-direc_normal='/projects/p30007/Zexian/Alignment/BBCAR/RAW_data'
+InputDir='/my_projects/'
 
 
 from os import listdir
@@ -29,8 +28,8 @@ varDict_call='/projects/p30007/Zexian/tools/VarDictJava/build/install/VarDict/bi
 interval='/projects/p30007/Zexian/tools/DNAtools/S07604514_Padded.bed'
 normal_pon='/projects/p30007/Zexian/Alignment/Germline_37/administrative/MuTect2_PON.vcf'
 
-Raw_reads=direc+'/RAW_data'
-RootFolder = direc+'/WES_Analysis'
+Raw_reads=InputDir+'/RAW_data'
+RootFolder = InputDir+'/WES_Analysis'
 ScriptFolder = InputDir+'/administrative/Step4codes/'
 OutputFolder_normal = InputDir+'/administrative/Step2Data/'
 
