@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jan 20 22:24:19 2019
-
 @author: Zexian
 """
-InputDir='/my_projects/'
-
 
 from os import listdir
 from os.path import isfile, join
@@ -14,19 +11,26 @@ import os
 import os.path
 import commands
 
-picardtool='java -jar /projects/p30007/Zexian/tools/picard-tools-1.131/picard.jar'
-GATKtool='java -jar /projects/p30007/Zexian/tools/GenomeAnalysisTK-3.6/GenomeAnalysisTK.jar'
-hg19Reference='/projects/p30007/Zexian/reference/hg19/ucsc.hg19.fasta'
-gold1000Indel ='/projects/p30007/Zexian/reference/hg19/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf'
-dbsnp='/projects/p30007/Zexian/reference/hg19/dbsnp_138.hg19.vcf'
-annovar_call='perl /projects/p30007/Zexian/tools/annovar/table_annovar.pl'
-snpeff_call='java -Xmx32g -jar /projects/p30007/Zexian/tools/snpEff/snpEff.jar'
-HaloPlex_for_Haplotype='python /projects/p30007/Zexian/tools/DNAtools/HaloPlex_for_Haplotype.py'
-takeExon='python /projects/p30007/Zexian/tools/DNAtools/Take_exon_splicing_from_annotated_VCF.py'
-varScan_call='java -Xmx32g -d64 -jar /projects/p30007/Zexian/tools/Varscan/VarScan.v2.3.9.jar'
+InputDir='/my_projects/'
+
+#Tool directory ///tools required. resource bundlels can be downloaded at: https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0/?pli=1
+    #for the fa and vcf files, remember to index them 
+    #annovar and snpeff, remeber to build database before use
+picardtool='java -jar /my_tools/picard-tools-1.131/picard.jar'
+GATKtool='java -jar /my_tools/GenomeAnalysisTK-3.6/GenomeAnalysisTK.jar'
+hg19Reference='/my_tools/reference/hg38/ucsc.hg38.fasta'
+gold1000Indel ='/my_tools/reference/hg38/Mills_and_1000G_gold_standard.indels.hg38.sites.vcf'
+dbsnp='my_tools/reference/hg38/dbsnp_138.hg38.vcf'
+annovar_call='perl /my_tools/annovar/table_annovar.pl'
+snpeff_call='java -Xmx32g -jar /my_tools/snpEff/snpEff.jar'
+varScan_call='java -Xmx32g -d64 -jar /my_tools/Varscan/VarScan.v2.3.9.jar'
 varDict_call='/projects/p30007/Zexian/tools/VarDictJava/build/install/VarDict/bin/VarDict'
-interval='/projects/p30007/Zexian/tools/DNAtools/S07604514_Padded.bed'
-normal_pon='/projects/p30007/Zexian/Alignment/Germline_37/administrative/MuTect2_PON.vcf'
+    #optional tools
+HaloPlex_for_Haplotype='python /projects/p30007/Zexian/tools/DNAtools/HaloPlex_for_Haplotype.py'
+WES_interval='/projects/p30007/Zexian/tools/DNAtools/S07604514_Padded.bed'
+Normal_PON='/projects/p30007/Zexian/Alignment/Germline_37/administrative/MuTect2_PON.vcf'
+Parse_Exon='python /projects/p30007/Zexian/tools/DNAtools/Take_exon_splicing_from_annotated_VCF.py'
+
 
 Raw_reads=InputDir+'/RAW_data'
 RootFolder = InputDir+'/WES_Analysis'
