@@ -49,8 +49,7 @@ WES_interval=MyTools+'DNAtools/S07604514_Padded.bed'
 Normal_PON=MyTools+'MuTect2_PON.vcf'
 
 # create folders
-WESFolder = InputDir+'WES_Analysis'
-ScriptFolder = InputDir+'/Codes/Step1codes/'
+WESFolder = Project_Direc+'WES_Analysis'
 
 BamFolder = WESFolder+'/BAM'
 SampleDepthDirec=WESFolder+'/Analysis/Sample_Depth/'
@@ -103,36 +102,49 @@ VarScan_midprocess=VarScanFolder+'/ISOWN/Midprocess'
 VarDict_preprocess=VarDcitFolder+'/ISOWN/Preprocess'
 VarDict_midprocess=VarDcitFolder+'/ISOWN/Midprocess'
 
-Varscan_CNV=direc+'CNV/VarScan'
+Varscan_CNV=Project_Direc+'CNV/VarScan'
 
-Validated_Samples=dict()
-with open (InputDir+'/administrative/ValidaSamples.csv','r') as fin:
-    title=next(fin)
-    for line in fin:
-        print(line.strip())
-        Validated_Samples[line.strip()]=1
+#write a script to check if these folders were created, if not, create them using: 
+#if not os.path.exists(RootFolder):
+#    os.makedirs(RootFolder)
+
+#if want to run partial samples, store a sample_list.csv in the my_projects director
+CSV_Samples=dict()
+Raw_fastq_Samples=dict()
+listdirs = [d for d in os.listdir(Raw_Tumor_reads) if os.path.isdir(os.path.join(Raw_Tumor_reads, d))]
+for file in listdirs:
+    Raw_fastq_Samples[file]=1
+
+
+#if the file is present, read the files, if not, read files from Raw_reads
+if os.path.isfile(Project_Direc+'/Sample_list.csv'):
+    with open (Project_Direc+'/Sample_list.csv','r') as fin:
+        title=next(fin)
+        for line in fin:
+            print(line.strip())
+            CSV_Samples[line.strip()]=1
+else:
+    CSV_Samples=Raw_fastq_Samples
+
 
 filename_dict=dict()
 bamfile_dict=dict()
 cancerfilename_dict=dict()
 cancerbamfile_dict=dict()
-listdirs = [d for d in os.listdir(Raw_reads) if os.path.isdir(os.path.join(Raw_reads, d))]
 FileList = []
 Seqinfors=dict()
 
 for sample_folder in listdirs:
-    if sample_folder in Validated_Samples:
-        #print(sample_folder)
-        SampleName=sample_folder
-        Vscan_Sample=Varscan_CNV+'/'+SampleName
+    if sample_folder.replace(pattern,'') in CSV_Samples:
+        SampleName=sample_folder.replace(pattern,'')
         #if not os.path.exists(Vscan_Sample):
         #    os.makedirs(Vscan_Sample)
         script = open(ScriptFolder+'/'+SampleName+'_full.sh', "w")
         #Print MSUB Header
         script.write('''#!/bin/bash
 #MSUB -A b1042
-#MSUB -q genomicsburst
-#MSUB -l walltime=239:59:00
+#MSUB -q genomics
+#MSUB -l walltime=39:59:00
 #MSUB -m a
 #MSUB -j oe
 #MOAB -W umask=0113
