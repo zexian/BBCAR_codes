@@ -49,17 +49,16 @@ WES_interval=MyTools+'DNAtools/S07604514_Padded.bed'
 Normal_PON=MyTools+'MuTect2_PON.vcf'
 
 # create folders
-RootFolder = InputDir+'WES_Analysis'
-BamFolder = RootFolder+'/BAM'
+WESFolder = InputDir+'WES_Analysis'
 ScriptFolder = InputDir+'/Codes/Step1codes/'
 
+BamFolder = WESFolder+'/BAM'
+SampleDepthDirec=WESFolder+'/Analysis/Sample_Depth/'
 
-SampleDepthDirec=RootFolder+'/Analysis/Sample_Depth/'
-
-HaplotypeFolder=RootFolder+'/Haplotype'
-MutecFolder=RootFolder+'/Mutect'
-VarScanFolder=RootFolder+'/VarScan'
-VarDcitFolder=RootFolder+'/VarDict'
+HaplotypeFolder=WESFolder+'/Haplotype'
+MutecFolder=WESFolder+'/Mutect'
+VarScanFolder=WESFolder+'/VarScan'
+VarDcitFolder=WESFolder+'/VarDict'
 
 Haplo_VCF=HaplotypeFolder+'/VCF'
 Mutect_VCF=MutecFolder+'/VCF'
@@ -68,11 +67,10 @@ VarDict_VCF=VarDcitFolder+'/VCF'
 
 Filter_Haplo_VCF=HaplotypeFolder+'/Filter_VCF'
 
-
-Haplo_AnnoVCF='/projects/b1042/ClareLab/Zexian/Germline_37'+'/Haplo_annovar_AnnoVCF'
-Mutect_AnnoVCF='/projects/b1042/ClareLab/Zexian/Germline_37'+'/Mutect_annovar_AnnoVCF'
-VarScan_AnnoVCF='/projects/b1042/ClareLab/Zexian/Germline_37'+'/VarScan_annovar_AnnoVCF'
-VarDict_AnnoVCF='/projects/b1042/ClareLab/Zexian/Germline_37'+'/VarDict_annovar_AnnoVCF'
+Haplo_AnnoVCF=HaplotypeFolder+'/Haplo_annovar_AnnoVCF'
+Mutect_AnnoVCF=MutecFolder+'/Mutect_annovar_AnnoVCF'
+VarScan_AnnoVCF=VarScanFolder+'/VarScan_annovar_AnnoVCF'
+VarDict_AnnoVCF=VarDcitFolder+'/VarDict_annovar_AnnoVCF'
 
 Haplo_FinalVCF=HaplotypeFolder+'/annotated_VCF'
 Mutect_FinalVCF=MutecFolder+'/annotated_VCF'
@@ -95,7 +93,7 @@ VarDict_Exon=VarDcitFolder+'/exon_VCF'
 VarDict_Exon_5per=VarDcitFolder+'/exon_5per_VCF'
 VarDict_Exon_1per=VarDcitFolder+'/exon_1per_VCF'
 
-Analysis = RootFolder+'/Analysis'
+Analysis = WESFolder+'/Analysis'
 Variant_plot=Analysis+'/Variant_plot'
 
 Mutect_preprocess=MutecFolder+'/ISOWN/Preprocess'
@@ -106,7 +104,6 @@ VarDict_preprocess=VarDcitFolder+'/ISOWN/Preprocess'
 VarDict_midprocess=VarDcitFolder+'/ISOWN/Midprocess'
 
 Varscan_CNV=direc+'CNV/VarScan'
-Varscan_CNV_mileup='/projects/b1042/lyglab/Zexian/Germline_37/mileup'
 
 Validated_Samples=dict()
 with open (InputDir+'/administrative/ValidaSamples.csv','r') as fin:
