@@ -18,11 +18,11 @@ import sys
 
 annovar_call='perl /projects/p30007/Zexian/tools/annovar/table_annovar.pl'
 snpeff_call='java -jar /projects/p30007/Zexian/tools/snpEff/snpEff.jar'
-ScriptFolder='/projects/p30007/Zexian/Alignment/Germline_37/administrative/Step7codes/'
-Tempfiles='/projects/p30007/Zexian/Alignment/Germline_37/Tempfiles/'
-AnnoVCF='/projects/p30007/Zexian/Alignment/Germline_37/WES_Analysis/Mutect/PASS_VCF_Anno/'
+ScriptFolder='/projects/p30007/Zexian/Alignment/BBCAR_NEW/administrative/Step33code/'
+Tempfiles='/projects/p30007/Zexian/Alignment/BBCAR_NEW/Tempfiles/'
+AnnoVCF='/projects/p30007/Zexian/Alignment/BBCAR_NEW/WES_Analysis/Haplotype/VCF_Anno/'
 
-InDirec='/projects/p30007/Zexian/Alignment/Germline_37/WES_Analysis/Mutect/PASS_VCF/'
+InDirec='/projects/p30007/Zexian/Alignment/BBCAR_NEW/WES_Analysis/Haplotype/PASS_VCF/'
 listdirs = [f for f in listdir(InDirec) if isfile(join(InDirec, f))]
 
 	
@@ -48,7 +48,7 @@ module load  R/3.3.3
 ''')    
 
     print >> script, snpeff_call+' hg19 -ss 3 -canon '+InDirec+file+' > '+Tempfiles+'/'+SampleName+'.vcf\n'
-    print >> script, annovar_call+' --thread 4 '+Tempfiles+'/'+SampleName+'.vcf'+' /projects/p30007/Zexian/tools/annovar/humandb/ -buildver hg19 -out '+AnnoVCF+SampleName+' -remove -protocol avsnp147,refGene,cytoBand,dbnsfp31a_interpro,1000g2015aug_all,exac03,esp6500siv2_all,dbnsfp35a,revel,clinvar_20180603,snp138NonFlagged,cosmic80 -operation f,g,r,f,f,f,f,f,f,f,f,f -nastring . -vcfinput\n'  
+    print >> script, annovar_call+' --thread 4 '+Tempfiles+'/'+SampleName+'.vcf'+' /projects/p30007/Zexian/tools/annovar/humandb/ -buildver hg19 -out '+AnnoVCF+SampleName+' -remove -protocol avsnp147,refGene,cytoBand,dbnsfp31a_interpro,1000g2015aug_all,exac03,esp6500siv2_all,dbnsfp35a,revel,clinvar_20180603,snp138NonFlagged,cosmic80 -operation f,g,r,f,f,f,f,f,f,f,f,f -nastring . -vcfinput\n' 
 
     script.close()
 
